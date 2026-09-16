@@ -4,7 +4,9 @@ from google import genai
 from google.genai import types
 from google.genai import errors as genai_errors
 
-from config import FALLBACK_MODELS, MODEL_NAME, SYSTEM_INSTRUCTION
+from google.genai.chats import Chat
+
+from config import CHAT_SYSTEM_INSTRUCTION, FALLBACK_MODELS, MODEL_NAME, SYSTEM_INSTRUCTION
 
 
 def get_client(api_key: str) -> genai.Client:
@@ -56,3 +58,34 @@ def mejorar_texto(client: genai.Client, texto: str, temperatura: float) -> tuple
 
     assert ultimo_error is not None
     raise ultimo_error
+
+
+def crear_chat(client: genai.Client, texto_original: str, texto_editado: str, temperatura: float) -> Chat:
+    """Crea una sesión de chat multi-turno para pedir ajustes sobre la edición.
+
+    Se siembra con el texto original y la primera versión editada como
+    contexto, para que el usuario pueda pedir correcciones o hacer preguntas
+    de seguimiento sin repetir el texto en cada mensaje.
+    """
+    return client.chats.create(
+        model=MODEL_NAME,
+        config=types.GenerateContentConfig(
+            system_instruction=CHAT_SYSTEM_INSTRUCTION,
+            temperature=temperatura,
+        ),
+        history=[
+            types.Content(role="user", parts=[types.Part(text=f"Texto original:\n\n{texto_original}")]),
+            types.Content(role="model", parts=[types.Part(text=texto_editado)]),
+        ],
+    )
+
+
+def enviar_mensaje_chat(chat: Chat, mensaje: str) -> str:
+    """Envía un mensaje de seguimiento en la sesión de chat y devuelve la respuesta."""
+    response = chat.send_message(mensaje)
+    if not response.text:
+        raise ValueError(
+            "El modelo no devolvió texto. Es posible que el contenido haya "
+            "sido bloqueado por los filtros de seguridad de Gemini."
+        )
+    return response.text
