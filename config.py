@@ -1,6 +1,6 @@
 """Configuración y constantes del Asistente de Edición y Estilo Académico."""
 
-MODEL_NAME = "gemini-2.5-flash"
+MODEL_NAME = "gemini-3.8-flash"
 
 PAGE_CONFIG = {
     "page_title": "Asistente de Edición Académica",
