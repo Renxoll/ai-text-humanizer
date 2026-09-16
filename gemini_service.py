@@ -2,8 +2,9 @@
 
 from google import genai
 from google.genai import types
+from google.genai import errors as genai_errors
 
-from config import MODEL_NAME, SYSTEM_INSTRUCTION
+from config import FALLBACK_MODELS, MODEL_NAME, SYSTEM_INSTRUCTION
 
 
 def get_client(api_key: str) -> genai.Client:
@@ -11,14 +12,10 @@ def get_client(api_key: str) -> genai.Client:
     return genai.Client(api_key=api_key)
 
 
-def mejorar_texto(client: genai.Client, texto: str, temperatura: float) -> str:
-    """Envía el texto al modelo y devuelve la versión editada.
-
-    Lanza las excepciones tal como las emite el SDK (google.genai.errors)
-    para que la capa de UI decida cómo mostrarlas.
-    """
+def _generar_con_modelo(client: genai.Client, modelo: str, texto: str, temperatura: float) -> str:
+    """Llama a un modelo puntual y valida que haya devuelto texto."""
     response = client.models.generate_content(
-        model=MODEL_NAME,
+        model=modelo,
         contents=texto,
         config=types.GenerateContentConfig(
             system_instruction=SYSTEM_INSTRUCTION,
@@ -31,3 +28,31 @@ def mejorar_texto(client: genai.Client, texto: str, temperatura: float) -> str:
             "sido bloqueado por los filtros de seguridad de Gemini."
         )
     return response.text
+
+
+def mejorar_texto(client: genai.Client, texto: str, temperatura: float) -> tuple[str, str]:
+    """Envía el texto al modelo principal y devuelve la versión editada.
+
+    Si el modelo principal responde 503 (saturado por alta demanda), reintenta
+    en orden con los modelos de FALLBACK_MODELS hasta que alguno responda.
+    Cualquier otra excepción (clave inválida, cuota, bloqueo de contenido) se
+    propaga de inmediato, sin probar alternativas.
+
+    Devuelve una tupla (texto_editado, nombre_del_modelo_que_respondió), para
+    que la capa de UI pueda informar si se usó un modelo alternativo.
+    """
+    candidatos = [MODEL_NAME] + FALLBACK_MODELS
+    ultimo_error: genai_errors.ServerError | None = None
+
+    for modelo in candidatos:
+        try:
+            resultado = _generar_con_modelo(client, modelo, texto, temperatura)
+            return resultado, modelo
+        except genai_errors.ServerError as e:
+            if e.code == 503:
+                ultimo_error = e
+                continue
+            raise
+
+    assert ultimo_error is not None
+    raise ultimo_error

@@ -21,6 +21,7 @@ from google.genai import errors as genai_errors
 
 from config import (
     DEFAULT_TEMPERATURE,
+    FALLBACK_MODELS,
     MODEL_NAME,
     PAGE_CONFIG,
     TEMPERATURE_MAX,
@@ -36,6 +37,8 @@ if "resultado" not in st.session_state:
     st.session_state.resultado = ""
 if "texto_procesado" not in st.session_state:
     st.session_state.texto_procesado = ""
+if "modelo_usado" not in st.session_state:
+    st.session_state.modelo_usado = ""
 
 
 # ---------------------------------------------------------------------------
@@ -63,7 +66,14 @@ with st.sidebar:
         ),
     )
 
-    st.caption(f"Modelo utilizado: `{MODEL_NAME}`")
+    st.caption(f"Modelo principal: `{MODEL_NAME}`")
+    with st.expander("Modelos de respaldo (si hay saturación)"):
+        st.caption(
+            "Si el modelo principal responde con error 503 (alta demanda), "
+            "se reintenta automáticamente en este orden:"
+        )
+        for m in FALLBACK_MODELS:
+            st.caption(f"• `{m}`")
     st.divider()
     st.caption(
         "Esta herramienta edita y mejora la redacción de textos que ya "
@@ -131,11 +141,20 @@ if procesar:
         try:
             with st.spinner("Analizando patrones repetitivos y mejorando la redacción..."):
                 client = get_client(api_key)
-                resultado = mejorar_texto(client, texto_original, temperatura)
+                resultado, modelo_usado = mejorar_texto(client, texto_original, temperatura)
 
             st.session_state.resultado = resultado
             st.session_state.texto_procesado = texto_original
-            st.success("✅ Texto editado con éxito. Revisa la pestaña 'Comparar cambios' para ver el detalle.")
+            st.session_state.modelo_usado = modelo_usado
+
+            if modelo_usado == MODEL_NAME:
+                st.success("✅ Texto editado con éxito. Revisa la pestaña 'Comparar cambios' para ver el detalle.")
+            else:
+                st.success(
+                    f"✅ Texto editado con éxito usando el modelo alternativo `{modelo_usado}` "
+                    f"(`{MODEL_NAME}` estaba saturado por alta demanda). "
+                    "Revisa la pestaña 'Comparar cambios' para ver el detalle."
+                )
             st.rerun()
 
         except genai_errors.ClientError as e:
@@ -154,8 +173,9 @@ if procesar:
 
         except genai_errors.ServerError as e:
             st.error(
-                f"❌ El servicio de Gemini no está disponible en este momento. "
-                f"Intenta nuevamente en unos minutos. Detalle: {e}"
+                "❌ El modelo principal y todos los modelos alternativos están "
+                "saturados por alta demanda en este momento. Intenta nuevamente "
+                f"en unos minutos. Detalle: {e}"
             )
 
         except ValueError as e:

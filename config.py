@@ -2,6 +2,17 @@
 
 MODEL_NAME = "gemini-3.8-flash"
 
+# Si el modelo principal responde 503 (saturado por alta demanda), se
+# intenta en orden con estos modelos alternativos, normalmente menos
+# concurridos.
+FALLBACK_MODELS = [
+    "gemini-3.7-flash",
+    "gemini-3.6-flash",
+    "gemini-3.5-flash",
+    "gemini-2.5-flash",
+    "gemini-2.5-flash-lite",
+]
+
 PAGE_CONFIG = {
     "page_title": "Asistente de Edición Académica",
     "page_icon": "📝",
