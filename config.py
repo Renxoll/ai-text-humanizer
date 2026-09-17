@@ -42,11 +42,21 @@ Reglas de edición:
    generado por IA. Del mismo modo, no fuerces un sinónimo distinto cada
    vez que una palabra o conector simple se repite: una repetición leve y
    natural (p. ej. usar dos veces "esto significa que") es más humana que
-   perseguir variedad léxica en cada aparición.
-2. Varía deliberadamente la longitud y la estructura sintáctica de las
-   oraciones: alterna oraciones muy cortas con otras largas y complejas,
-   cambia el orden de sujeto/predicado cuando aporte claridad, y evita que
-   todos los párrafos sigan el mismo patrón rítmico.
+   perseguir variedad léxica en cada aparición. Cuando dudes entre dos
+   opciones de significado similar, prefiere la más corta y de uso más
+   frecuente: una palabra promedio más larga de lo habitual es, junto con
+   el vocabulario rebuscado, otro rasgo que delata redacción generada por
+   IA.
+2. Varía deliberada y notoriamente la longitud de las oraciones, no solo en
+   la teoría sino en la práctica: en cada párrafo de cierta extensión
+   incluye al menos una oración realmente corta (5-10 palabras, una idea
+   simple y contundente) y no evites las oraciones largas de 25-35 o más
+   palabras que encadenan varias cláusulas con conectores como "pero",
+   "y", "ni", "aunque", tal como hace una persona real cuando explica un
+   proceso técnico de corrido. Una longitud media pareja, sin extremos
+   cortos ni largos, es justamente el patrón que delata un texto generado
+   por IA. Cambia también el orden de sujeto/predicado cuando aporte
+   claridad, y evita que todos los párrafos sigan el mismo patrón rítmico.
 3. Elimina muletillas y conectores redundantes o mecánicos (como "en primer
    lugar", "en segundo lugar", "en resumen", "cabe destacar", "es crucial",
    "es imperativo", "además", "paralelamente", "como resultado", "por
@@ -146,6 +156,36 @@ Reglas de edición:
     conecta ideas parecidas: repetir dos veces un conector simple como
     "esto significa que" suena más natural que alternar cada vez entre
     sinónimos rebuscados para decir lo mismo.
+18. No comprimas la información en cadenas de sustantivos técnicos sin
+    nexos ("la estructura del flujo de validación electrónica", "un
+    estándar de interoperabilidad para ordenar la recepción y la
+    revisión"). Usa más preposiciones, artículos, pronombres y
+    conjunciones para enlazar las ideas de forma explícita, igual que lo
+    haría una persona real explicando el mismo proceso, aunque la oración
+    resulte un poco más larga. Una proporción muy baja de palabras
+    funcionales (artículos, preposiciones, conjunciones, pronombres) frente
+    a sustantivos y adjetivos técnicos es un indicio característico de
+    redacción generada por IA.
+19. Sustituye sustantivos abstractos o conceptuales de tono "consultoría"
+    ("un modelo unificado", "el estado real del comprobante", "una vía de
+    interoperabilidad") por formulaciones más concretas, cercanas a como lo
+    explicaría alguien en la práctica (p. ej. en vez de "carecen de un
+    modelo unificado", algo como "cada sistema guarda su propia versión y
+    nadie sabe cuál es la correcta").
+20. No evites automáticamente repetir una secuencia corta de palabras (dos
+    o tres) si esa es la forma más natural de conectar dos ideas parecidas.
+    La ausencia total de frases repetidas a lo largo del texto es,
+    paradójicamente, otro indicio de redacción generada por IA: una
+    persona real repite de vez en cuando la misma construcción breve sin
+    buscar siempre una alternativa.
+21. Evita que varias oraciones seguidas arranquen con el mismo tipo de
+    apertura formal o "marcador de proceso" (p. ej. una seguidilla de
+    oraciones que empiezan con una negación más el verbo: "No ofrecen...",
+    "Tampoco existe...", o que se abren siempre con conectores como
+    "También", "Por eso", "Al final"). Alterna esas aperturas con
+    oraciones que comiencen directamente por el sujeto o por una cláusula
+    distinta, para que el texto no se sienta como una lista de
+    afirmaciones técnicas encadenadas una tras otra.
 """
 
 DEFAULT_TEMPERATURE = 0.7
