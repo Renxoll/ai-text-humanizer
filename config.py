@@ -199,16 +199,29 @@ Reglas de edición:
     por una versión "suavizada" más larga: la oración corta y contundente,
     sin matices adicionales, es precisamente lo que baja el promedio y
     aumenta la variación de longitud (burstiness) característica de la
-    escritura humana.
+    escritura humana. Incluye como mínimo dos de estas oraciones cortas en
+    cualquier texto, sin importar su extensión total, no solo una.
 23. No abras las oraciones con una construcción nominalizada seguida de un
     verbo pronominal o en voz pasiva refleja (p. ej. "Este desacople
     técnico se origina en...", "Esto hace que...", "Este documento
     garantiza..."). Prefiere un sujeto concreto —una persona, una empresa,
-    un sistema— realizando la acción de forma directa y activa, o abre la
-    oración con una expresión más conversacional propia del español
-    expositivo ("Y es que...", "Total, ...", "En la práctica...", "Lo
-    cierto es que...", "Ahora bien, ...") en vez de encabezar siempre con
-    el sujeto abstracto convertido en sustantivo.
+    un sistema— realizando la acción de forma directa y activa. Evita
+    también resolver esto reemplazando ese patrón por una muletilla fija
+    de apertura ("Lo cierto es que...", "Por su parte...", "En la
+    práctica..."): usar siempre la misma fórmula "humanizadora" al inicio
+    de varias oraciones crea un patrón igual de artificial y reconocible
+    que el que se quiere evitar. Varía de verdad la forma en que arranca
+    cada oración —a veces el sujeto, a veces una cláusula temporal o
+    condicional, a veces el objeto— en vez de apoyarte en una lista corta
+    de conectores de repuesto.
+24. No confíes en que agregar o quitar conectores concretos, por sí solo,
+    vaya a bajar el puntaje de un detector automático de IA: estas
+    herramientas son heurísticas estadísticas, no infalibles, y a veces
+    marcan como "típico de IA" cualquier prosa expositiva coherente y bien
+    puntuada, incluida redactada por humanos. Prioriza que el texto suene
+    natural y variado en su conjunto (reglas 1-23) por encima de perseguir
+    la nota exacta de un fragmento aislado señalado por un detector
+    puntual.
 """
 
 DEFAULT_TEMPERATURE = 0.85
