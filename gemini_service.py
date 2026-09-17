@@ -14,13 +14,32 @@ def get_client(api_key: str) -> genai.Client:
     return genai.Client(api_key=api_key)
 
 
-def _generar_con_modelo(client: genai.Client, modelo: str, texto: str, temperatura: float) -> str:
+def _con_instrucciones_estilo(instruccion_base: str, instrucciones_estilo: str) -> str:
+    """Añade al final de una instrucción base las preferencias de estilo del usuario, si las hay."""
+    if not instrucciones_estilo.strip():
+        return instruccion_base
+    return (
+        f"{instruccion_base}\n\n"
+        "Instrucción adicional de estilo indicada por el usuario para esta "
+        "tarea (respétala siempre que no contradiga las reglas anteriores, "
+        "en especial la de no alterar significado, datos ni citas):\n"
+        f"{instrucciones_estilo.strip()}"
+    )
+
+
+def _generar_con_modelo(
+    client: genai.Client,
+    modelo: str,
+    texto: str,
+    temperatura: float,
+    instrucciones_estilo: str = "",
+) -> str:
     """Llama a un modelo puntual y valida que haya devuelto texto."""
     response = client.models.generate_content(
         model=modelo,
         contents=texto,
         config=types.GenerateContentConfig(
-            system_instruction=SYSTEM_INSTRUCTION,
+            system_instruction=_con_instrucciones_estilo(SYSTEM_INSTRUCTION, instrucciones_estilo),
             temperature=temperatura,
         ),
     )
@@ -32,13 +51,22 @@ def _generar_con_modelo(client: genai.Client, modelo: str, texto: str, temperatu
     return response.text
 
 
-def mejorar_texto(client: genai.Client, texto: str, temperatura: float) -> tuple[str, str]:
+def mejorar_texto(
+    client: genai.Client,
+    texto: str,
+    temperatura: float,
+    instrucciones_estilo: str = "",
+) -> tuple[str, str]:
     """Envía el texto al modelo principal y devuelve la versión editada.
 
     Si el modelo principal responde 503 (saturado por alta demanda), reintenta
     en orden con los modelos de FALLBACK_MODELS hasta que alguno responda.
     Cualquier otra excepción (clave inválida, cuota, bloqueo de contenido) se
     propaga de inmediato, sin probar alternativas.
+
+    `instrucciones_estilo` son preferencias libres del usuario (p. ej. "tono
+    más conversacional", "dirigido a un público no experto") que se añaden a
+    las reglas base del editor para esta ejecución.
 
     Devuelve una tupla (texto_editado, nombre_del_modelo_que_respondió), para
     que la capa de UI pueda informar si se usó un modelo alternativo.
@@ -48,7 +76,7 @@ def mejorar_texto(client: genai.Client, texto: str, temperatura: float) -> tuple
 
     for modelo in candidatos:
         try:
-            resultado = _generar_con_modelo(client, modelo, texto, temperatura)
+            resultado = _generar_con_modelo(client, modelo, texto, temperatura, instrucciones_estilo)
             return resultado, modelo
         except genai_errors.ServerError as e:
             if e.code == 503:
@@ -60,7 +88,13 @@ def mejorar_texto(client: genai.Client, texto: str, temperatura: float) -> tuple
     raise ultimo_error
 
 
-def crear_chat(client: genai.Client, texto_original: str, texto_editado: str, temperatura: float) -> Chat:
+def crear_chat(
+    client: genai.Client,
+    texto_original: str,
+    texto_editado: str,
+    temperatura: float,
+    instrucciones_estilo: str = "",
+) -> Chat:
     """Crea una sesión de chat multi-turno para pedir ajustes sobre la edición.
 
     Se siembra con el texto original y la primera versión editada como
@@ -70,7 +104,7 @@ def crear_chat(client: genai.Client, texto_original: str, texto_editado: str, te
     return client.chats.create(
         model=MODEL_NAME,
         config=types.GenerateContentConfig(
-            system_instruction=CHAT_SYSTEM_INSTRUCTION,
+            system_instruction=_con_instrucciones_estilo(CHAT_SYSTEM_INSTRUCTION, instrucciones_estilo),
             temperature=temperatura,
         ),
         history=[

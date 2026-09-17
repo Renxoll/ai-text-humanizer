@@ -57,6 +57,36 @@ TEMPERATURE_MIN = 0.2
 TEMPERATURE_MAX = 1.0
 TEMPERATURE_STEP = 0.05
 
+# Frases y muletillas genéricas, típicas de una escritura mecánica y poco
+# variada (propia o de un borrador generado por IA). Se usan únicamente para
+# el diagnóstico local de estilo (text_analysis.py): señalan al usuario dónde
+# podría variar su redacción, sin llamar a la API ni estimar "detectabilidad".
+CLICHE_PHRASES = [
+    "en primer lugar",
+    "en segundo lugar",
+    "en tercer lugar",
+    "en resumen",
+    "en conclusión",
+    "cabe destacar",
+    "cabe resaltar",
+    "es crucial",
+    "es imperativo",
+    "es fundamental",
+    "es importante destacar",
+    "sin duda",
+    "no cabe duda",
+    "además",
+    "asimismo",
+    "por otro lado",
+    "por ende",
+    "de manera similar",
+    "en la actualidad",
+    "a fin de cuentas",
+    "un testimonio de",
+    "nos sumergiremos",
+    "exploraremos",
+]
+
 # Delimitadores usados por el modelo en el chat de ajustes para marcar dónde
 # empieza y termina el texto completo actualizado (ver CHAT_SYSTEM_INSTRUCTION).
 CHAT_UPDATE_START = "<<<TEXTO_ACTUALIZADO>>>"
