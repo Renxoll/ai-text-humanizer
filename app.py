@@ -36,7 +36,7 @@ from config import (
 )
 from diff_utils import generar_diff_html
 from gemini_service import crear_chat, enviar_mensaje_chat, get_client, mejorar_texto
-from ui_helpers import boton_copiar, mostrar_pantalla_completa
+from ui_helpers import boton_copiar, mostrar_pantalla_completa, renderizar_diagnostico
 
 st.set_page_config(**PAGE_CONFIG)
 
@@ -104,6 +104,16 @@ with st.sidebar:
         ),
     )
 
+    instrucciones_estilo = st.text_area(
+        "Instrucciones de estilo (opcional)",
+        placeholder=(
+            "Ej: tono más conversacional, dirigido a un público no experto, "
+            "estilo de blog, evita la primera persona..."
+        ),
+        height=90,
+        help="Preferencias adicionales que se sumarán a las reglas del editor para esta sesión.",
+    )
+
     st.caption(f"Modelo principal: `{MODEL_NAME}`")
     with st.expander("Modelos de respaldo (si hay saturación)"):
         st.caption(
@@ -142,6 +152,9 @@ with col_input:
     )
     procesar = st.button("✨ Mejorar redacción", type="primary", use_container_width=True)
 
+    with st.expander("🔎 Diagnóstico de estilo del original (local, sin usar la API)"):
+        renderizar_diagnostico(texto_original, key="original")
+
 with col_output:
     st.subheader("Texto editado")
     tab_resultado, tab_diff, tab_chat = st.tabs(
@@ -164,6 +177,9 @@ with col_output:
                     mostrar_pantalla_completa(st.session_state.resultado)
             with col_b:
                 boton_copiar(st.session_state.resultado, key="resultado_principal")
+
+            with st.expander("🔎 Diagnóstico de estilo del resultado (local, sin usar la API)"):
+                renderizar_diagnostico(st.session_state.resultado, key="resultado")
 
     with tab_diff:
         if st.session_state.resultado:
@@ -199,6 +215,7 @@ with col_output:
                                 st.session_state.texto_procesado,
                                 st.session_state.resultado,
                                 temperatura,
+                                instrucciones_estilo,
                             )
 
                         with st.spinner("Pensando una respuesta..."):
@@ -239,7 +256,9 @@ if procesar:
         try:
             with st.spinner("Analizando patrones repetitivos y mejorando la redacción..."):
                 client = get_client(api_key)
-                resultado, modelo_usado = mejorar_texto(client, texto_original, temperatura)
+                resultado, modelo_usado = mejorar_texto(
+                    client, texto_original, temperatura, instrucciones_estilo
+                )
 
             st.session_state.resultado = resultado
             st.session_state.texto_procesado = texto_original
