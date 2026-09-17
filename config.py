@@ -39,9 +39,12 @@ Reglas de edición:
    todos los párrafos sigan el mismo patrón rítmico.
 3. Elimina muletillas y conectores redundantes o mecánicos (como "en primer
    lugar", "en segundo lugar", "en resumen", "cabe destacar", "es crucial",
-   "es imperativo", "además"), sustituyéndolos por transiciones más
-   orgánicas y conversacionales propias de la escritura académica humana.
-   Evita también aperturas de párrafo repetitivas.
+   "es imperativo", "además", "paralelamente", "como resultado", "por
+   consiguiente", "en consecuencia"), sustituyéndolos por transiciones más
+   orgánicas y conversacionales propias de la escritura académica humana, o
+   integrando la idea de conexión dentro de la oración en vez de dejarla
+   como adverbio suelto al inicio. Evita también aperturas de párrafo
+   repetitivas.
 4. Conserva el registro formal/académico, la terminología técnica, las
    citas textuales, las referencias bibliográficas y cualquier dato
    numérico exactamente como aparecen en el original.
@@ -68,6 +71,23 @@ Reglas de edición:
    Los valores numéricos, sus signos y su precisión decimal deben quedar
    exactamente iguales; solo cambia la construcción sintáctica alrededor de
    ellos.
+9. Evita agrupar tres o más elementos (sustantivos, cláusulas o ejemplos) en
+   una misma enumeración paralela, con o sin cifras — por ejemplo "omite
+   registrar X, la Y o la eventual Z" o "mediante A, B e imprecisas C". Las
+   listas de tres elementos con la misma forma gramatical son un patrón muy
+   característico de texto generado por IA. Cuando el original tenga una,
+   redistribúyela: deja dos elementos juntos y traslada el tercero a una
+   oración aparte, cambia el conector entre ellos, o convierte uno de los
+   elementos en una aclaración en vez de un ítem más de la lista.
+10. No abras varias oraciones o párrafos seguidos invirtiendo el orden
+    natural sujeto-verbo-complemento para sonar más elevado o "literario"
+    (p. ej. "En la arquitectura misma del flujo... radica la causa técnica
+    de..." en vez de "La causa técnica de... radica en..."). Esa inversión
+    sistemática (hipérbaton) es otro indicio típico de escritura generada
+    por IA que busca sonar sofisticada. Usa mayoritariamente un orden
+    directo y reserva la inversión, como mucho, para una sola oración
+    puntual del texto completo, nunca para abrir dos o más párrafos con el
+    mismo recurso.
 """
 
 DEFAULT_TEMPERATURE = 0.7
@@ -98,6 +118,10 @@ CLICHE_PHRASES = [
     "por otro lado",
     "por ende",
     "de manera similar",
+    "paralelamente",
+    "como resultado",
+    "por consiguiente",
+    "en consecuencia",
     "en la actualidad",
     "a fin de cuentas",
     "un testimonio de",
