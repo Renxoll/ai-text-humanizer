@@ -6,6 +6,8 @@ import json
 import streamlit as st
 import streamlit.components.v1 as components
 
+from text_analysis import analizar_variedad_oraciones, detectar_cliches
+
 
 def boton_copiar(texto: str, key: str, etiqueta: str = "📋 Copiar") -> None:
     """Renderiza un botón que copia `texto` al portapapeles del navegador del usuario."""
@@ -50,3 +52,41 @@ def mostrar_pantalla_completa(texto: str) -> None:
     """Abre un modal grande mostrando `texto` completo, con su propio botón de copiar."""
     st.session_state["_texto_dialogo"] = texto
     _dialogo_pantalla_completa()
+
+
+def renderizar_diagnostico(texto: str, key: str) -> None:
+    """Muestra un diagnóstico local de estilo: muletillas y variedad de oraciones.
+
+    No llama a la API; es retroalimentación de calidad de escritura sobre el
+    propio texto (no una estimación de "detectabilidad" ante ningún sistema).
+    """
+    if not texto.strip():
+        st.info("No hay texto para analizar todavía.")
+        return
+
+    stats = analizar_variedad_oraciones(texto)
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Oraciones", stats["num_oraciones"])
+    col2.metric("Longitud promedio", f"{stats['promedio']} palabras")
+    col3.metric("Rango (min–máx)", f"{stats['minimo']}–{stats['maximo']}")
+
+    if stats["num_oraciones"] >= 3:
+        if stats["desviacion"] < 3:
+            st.warning(
+                f"⚠️ Poca variedad de ritmo: tus oraciones tienen una longitud muy "
+                f"similar (desviación de {stats['desviacion']} palabras). Prueba "
+                "mezclar oraciones cortas y largas."
+            )
+        else:
+            st.success(
+                f"✅ Buena variedad de longitud de oraciones (desviación de "
+                f"{stats['desviacion']} palabras)."
+            )
+
+    cliches = detectar_cliches(texto)
+    if cliches:
+        st.markdown("**Muletillas y frases genéricas encontradas:**")
+        for frase, conteo in cliches.items():
+            st.markdown(f"- *\"{frase}\"* — {conteo} {'vez' if conteo == 1 else 'veces'}")
+    else:
+        st.success("✅ No se encontraron muletillas genéricas comunes en el texto.")
