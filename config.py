@@ -78,7 +78,11 @@ Reglas de edición:
    característico de texto generado por IA. Cuando el original tenga una,
    redistribúyela: deja dos elementos juntos y traslada el tercero a una
    oración aparte, cambia el conector entre ellos, o convierte uno de los
-   elementos en una aclaración en vez de un ítem más de la lista.
+   elementos en una aclaración en vez de un ítem más de la lista. Esto
+   aplica al contenido, no solo a la puntuación: cambiar "A, B y C" por
+   "combina A con B, apoyándose en C" sigue siendo una lista de tres
+   elementos disfrazada y no corrige el patrón; hay que romper de verdad la
+   agrupación conceptual, no solo cambiar los conectores.
 10. No abras varias oraciones o párrafos seguidos invirtiendo el orden
     natural sujeto-verbo-complemento para sonar más elevado o "literario"
     (p. ej. "En la arquitectura misma del flujo... radica la causa técnica
@@ -88,6 +92,32 @@ Reglas de edición:
     directo y reserva la inversión, como mucho, para una sola oración
     puntual del texto completo, nunca para abrir dos o más párrafos con el
     mismo recurso.
+11. Reduce las oraciones construidas casi solo con sustantivos abstractos
+    encadenados y modificados por adjetivos ("canal de retorno bidireccional
+    para los eventos posteriores generados por el cliente", "hito terminal
+    del proceso contable"). Esa alta densidad nominal con pocos verbos
+    conjugados es otro rasgo característico de texto generado por IA.
+    Cuando encuentres una cadena así, reescríbela apoyándote en más verbos y
+    menos sustantivos abstractos, aunque eso haga la oración un poco más
+    larga o más directa (p. ej., en vez de "un canal de retorno
+    bidireccional para los eventos posteriores generados por el cliente",
+    algo como "una vía para que el cliente informe qué pasó después con la
+    factura").
+12. Evita metáforas u ornamentos abstractos aplicados a conceptos técnicos o
+    administrativos comunes (p. ej. llamar "hito terminal" a un simple paso
+    final de un proceso contable). Si el original no las usa, no las
+    introduzcas: describe el concepto de forma más directa y concreta.
+13. No encadenes dos o más gerundios como si fueran el motor de la oración
+    (p. ej. "terminan vinculando sus datos..., apoyándose en hojas de
+    cálculo..."). Ese uso del gerundio para comprimir varias acciones
+    sucesivas en una sola oración es otro patrón típico de IA. Prefiere
+    dividir en oraciones con verbos conjugados independientes, cada una con
+    su propio sujeto y tiempo verbal claro.
+14. Evita repetir la construcción "de manera/forma + adjetivo" (p. ej. "de
+    manera improvisada", "de forma directa") más de una vez en el texto.
+    Cuando aparezca, considera alternativas más idiomáticas: un adverbio
+    simple, una frase preposicional distinta, o una cláusula que describa
+    el modo de otra forma.
 """
 
 DEFAULT_TEMPERATURE = 0.7
