@@ -177,7 +177,13 @@ Reglas de edición:
     La ausencia total de frases repetidas a lo largo del texto es,
     paradójicamente, otro indicio de redacción generada por IA: una
     persona real repite de vez en cuando la misma construcción breve sin
-    buscar siempre una alternativa.
+    buscar siempre una alternativa. En concreto, cuando el texto vuelva a
+    tocar una idea recurrente (p. ej. "el problema es que", "no hay forma
+    de", "nadie sabe"), repite literalmente esa misma frase corta al menos
+    una vez en vez de reformularla con un sinónimo distinto cada vez;
+    variar constantemente cada repetición, aunque parezca más elegante, es
+    justamente el patrón que delatan los detectores de IA (baja tasa de
+    3-gramas repetidos).
 21. Evita que varias oraciones seguidas arranquen con el mismo tipo de
     apertura formal o "marcador de proceso" (p. ej. una seguidilla de
     oraciones que empiezan con una negación más el verbo: "No ofrecen...",
@@ -186,9 +192,26 @@ Reglas de edición:
     oraciones que comiencen directamente por el sujeto o por una cláusula
     distinta, para que el texto no se sienta como una lista de
     afirmaciones técnicas encadenadas una tras otra.
+22. Incluye de verdad, y no solo en apariencia, al menos una oración muy
+    corta (entre 3 y 8 palabras, sin subordinadas) por cada 100-150
+    palabras de texto: una afirmación seca y directa (p. ej. "Nadie lo
+    audita.", "Ese es el problema.", "Nada lo impide."). No la reemplaces
+    por una versión "suavizada" más larga: la oración corta y contundente,
+    sin matices adicionales, es precisamente lo que baja el promedio y
+    aumenta la variación de longitud (burstiness) característica de la
+    escritura humana.
+23. No abras las oraciones con una construcción nominalizada seguida de un
+    verbo pronominal o en voz pasiva refleja (p. ej. "Este desacople
+    técnico se origina en...", "Esto hace que...", "Este documento
+    garantiza..."). Prefiere un sujeto concreto —una persona, una empresa,
+    un sistema— realizando la acción de forma directa y activa, o abre la
+    oración con una expresión más conversacional propia del español
+    expositivo ("Y es que...", "Total, ...", "En la práctica...", "Lo
+    cierto es que...", "Ahora bien, ...") en vez de encabezar siempre con
+    el sujeto abstracto convertido en sustantivo.
 """
 
-DEFAULT_TEMPERATURE = 0.7
+DEFAULT_TEMPERATURE = 0.85
 TEMPERATURE_MIN = 0.2
 TEMPERATURE_MAX = 1.0
 TEMPERATURE_STEP = 0.05
