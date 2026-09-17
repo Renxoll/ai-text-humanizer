@@ -28,11 +28,21 @@ SIN alterar su significado, sus datos, sus cifras, sus citas ni sus
 conclusiones.
 
 Reglas de edición:
-1. Identifica palabras y frases que se repiten con frecuencia en el texto
-   y, cuando sea posible, sustitúyelas por sinónimos o expresiones
-   alternativas que se ajusten mejor al contexto. Evita quedarte con la
-   primera opción léxica más obvia o predecible; prioriza la palabra que
-   mejor exprese el matiz exacto de la idea, aunque no sea la más común.
+1. Prioriza siempre el vocabulario simple, cotidiano y directo por encima
+   del sinónimo más sofisticado, técnico o "elegante". Cuando encuentres
+   una palabra o expresión de registro elevado, administrativo o
+   "literario" donde una palabra común transmita la misma idea sin perder
+   precisión, reemplázala por la opción más sencilla (p. ej. "brecha" →
+   "diferencia", "inconveniente" → "problema", "articula el seguimiento" →
+   "combina el seguimiento", "manifiestan discrepancias" → "enfrentan
+   problemas", "relegada a" → "se limita a", "planillas ofimáticas" →
+   "hojas de cálculo"). Conserva un término más específico solo cuando sea
+   estrictamente necesario por precisión técnica. Un texto redactado por
+   una persona real tiende a sonar más simple, no más rebuscado, que uno
+   generado por IA. Del mismo modo, no fuerces un sinónimo distinto cada
+   vez que una palabra o conector simple se repite: una repetición leve y
+   natural (p. ej. usar dos veces "esto significa que") es más humana que
+   perseguir variedad léxica en cada aparición.
 2. Varía deliberadamente la longitud y la estructura sintáctica de las
    oraciones: alterna oraciones muy cortas con otras largas y complejas,
    cambia el orden de sujeto/predicado cuando aporte claridad, y evita que
@@ -118,6 +128,24 @@ Reglas de edición:
     Cuando aparezca, considera alternativas más idiomáticas: un adverbio
     simple, una frase preposicional distinta, o una cláusula que describa
     el modo de otra forma.
+15. Elimina las rayas largas (—...—) y reduce al mínimo el punto y coma
+    como recurso para intercalar aclaraciones dentro de una misma oración.
+    En vez de eso, separa la aclaración en una oración corta aparte. Ese
+    tipo de incisos "literarios" es un recurso típico de texto generado
+    por IA; una persona real tiende a cortar la idea en dos frases simples.
+16. No expandas acrónimos o términos técnicos con su forma en inglés entre
+    paréntesis salvo que sea estrictamente indispensable para que el
+    lector entienda de qué se habla (p. ej. usa "el módulo de Cuentas por
+    Cobrar" en vez de "el módulo de cuentas por cobrar (Accounts
+    Receivable, AR)"). Si el término ya es reconocible en español, úsalo
+    directamente sin la aclaración bilingüe.
+17. Prefiere conectores simples y cotidianos ("por el contrario", "esto
+    significa que", "mientras tanto", "por eso") sobre conectores más
+    formales o "elevados" ("de hecho", "por tanto", "a la vez", "en
+    consecuencia"). No es necesario variar el conector cada vez que
+    conecta ideas parecidas: repetir dos veces un conector simple como
+    "esto significa que" suena más natural que alternar cada vez entre
+    sinónimos rebuscados para decir lo mismo.
 """
 
 DEFAULT_TEMPERATURE = 0.7
