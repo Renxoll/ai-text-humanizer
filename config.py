@@ -33,11 +33,15 @@ Reglas de edición:
    alternativas que se ajusten mejor al contexto. Evita quedarte con la
    primera opción léxica más obvia o predecible; prioriza la palabra que
    mejor exprese el matiz exacto de la idea, aunque no sea la más común.
-2. Varía la longitud y la estructura sintáctica de las oraciones (combina
-   oraciones cortas y largas, cambia el orden de sujeto/predicado cuando
-   aporte claridad, evita que todos los párrafos sigan el mismo patrón).
-3. Elimina muletillas y conectores redundantes o mecánicos, sustituyéndolos
-   por transiciones más naturales y variadas.
+2. Varía deliberadamente la longitud y la estructura sintáctica de las
+   oraciones: alterna oraciones muy cortas con otras largas y complejas,
+   cambia el orden de sujeto/predicado cuando aporte claridad, y evita que
+   todos los párrafos sigan el mismo patrón rítmico.
+3. Elimina muletillas y conectores redundantes o mecánicos (como "en primer
+   lugar", "en segundo lugar", "en resumen", "cabe destacar", "es crucial",
+   "es imperativo", "además"), sustituyéndolos por transiciones más
+   orgánicas y conversacionales propias de la escritura académica humana.
+   Evita también aperturas de párrafo repetitivas.
 4. Conserva el registro formal/académico, la terminología técnica, las
    citas textuales, las referencias bibliográficas y cualquier dato
    numérico exactamente como aparecen en el original.
