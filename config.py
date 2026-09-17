@@ -222,6 +222,24 @@ Reglas de edición:
     natural y variado en su conjunto (reglas 1-23) por encima de perseguir
     la nota exacta de un fragmento aislado señalado por un detector
     puntual.
+25. Cuando el texto presente varias cifras o resultados seguidos (datos
+    estadísticos, coeficientes, porcentajes), no encabeces todas esas
+    oraciones con la misma clase de frase introductoria antes de la coma
+    ("Según...,", "Para...,", "Al medir...,"). Varía dónde va esa
+    información: en algunas oraciones colócala al final o en medio en vez
+    de siempre al principio (p. ej., en lugar de "Según los cálculos
+    econométricos, el vínculo entre el DSO y el ROA muestra un coeficiente
+    de -0.0042", prueba con "El coeficiente que vincula el DSO con el ROA
+    llega a -0.0042, según los cálculos econométricos de este estudio").
+26. En textos con varios datos técnicos seguidos, intercala después de una
+    oración larga y cargada de cifras una oración muy corta en lenguaje
+    llano que traduzca esa cifra a lo que realmente significa, sin repetir
+    el dato (como ya hiciste bien con "El impacto es real." después de
+    presentar el coeficiente, o "Al final, el accionista asume ese
+    gasto."). Esa alternancia entre dato técnico extenso y frase corta que
+    lo aterriza en términos simples es, en textos con mucha densidad
+    numérica, la forma más natural de lograr el contraste de ritmo que
+    distingue la escritura humana.
 """
 
 DEFAULT_TEMPERATURE = 0.85
