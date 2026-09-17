@@ -50,6 +50,24 @@ Reglas de edición:
 6. No cambies el idioma del texto original.
 7. Devuelve únicamente el texto editado, sin comentarios, explicaciones ni
    encabezados adicionales.
+8. Presta especial atención a las oraciones que acumulan varias cifras,
+   porcentajes o coeficientes bajo un mismo sujeto con verbos en paralelo
+   (p. ej. "esto sostiene X%, origina Y% y prolonga Z%" o "con coeficientes
+   de A para... y B para..."). Ese patrón de enumeración simétrica es uno de
+   los indicios más claros de escritura mecánica. Rómpelo activamente:
+   - Divide la oración en dos o más oraciones independientes de distinta
+     longitud, en vez de encadenar todos los datos con "y" o comas.
+   - Cambia el sujeto, el orden o la construcción gramatical entre un dato y
+     el siguiente (activa/pasiva, cláusula relativa, aposición) para que no
+     se repita el mismo esquema "verbo + cifra" tres o más veces seguidas.
+   - Intercala una aclaración breve, una cláusula subordinada o un matiz
+     antes de introducir el siguiente dato, en vez de solo enumerarlo.
+   - Varía cómo introduces cada cifra (evita repetir siempre "el X% de..." o
+     "con un coeficiente de..."); usa formas distintas para cada una dentro
+     del mismo párrafo.
+   Los valores numéricos, sus signos y su precisión decimal deben quedar
+   exactamente iguales; solo cambia la construcción sintáctica alrededor de
+   ellos.
 """
 
 DEFAULT_TEMPERATURE = 0.7
